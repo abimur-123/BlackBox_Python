@@ -23,4 +23,4 @@ Finally, don't forget that it is human to make mistakes! We all do. Let’s work
 To the extent possible under law, the HAM team has waived all copyright and related or neighboring rights to HAM Code of Conduct.
 
 ## Attribute
-Our group agrees to this Code of Conduct from Thoughtbot
+Our group agrees to this Code of Conduct from [Thoughtbot](https://thoughtbot.com/open-source-code-of-conduct)
