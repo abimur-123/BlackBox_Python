@@ -1,12 +1,5 @@
 # BlackBox_Python
 
-
-Outline the package you would like to build in a README.md file which should live in each of the project's root directory (this can be identical for both projects at this point in the project). In this document include:
-the names of the contributors (the students on the teams)
-a summary paragraph that descibes the project at a high level
-a bulleted list of the functions (and datasets if applicable) that will be included in the package (this should be a 1-2 sentence description for each function/dataset)
-a paragraph describing where your packages fit into the Python and R ecosystems (are there any other Python or R software packages that have the same/similar functionality? Provide links to any that do. if none exist, then clearly state this as well).
-
 ### Contributors
 
 1. Siddharth Arora(@sarora)
