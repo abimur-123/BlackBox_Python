@@ -24,7 +24,8 @@ df=pd.DataFrame(data)
 #check input
 def test_input():
     '''
-    check if the input is valid for getConfidenceInterval()
+    check if the input is valid for performABtest_Freq function
+    Try invalid and NULL input.
     '''
     msg1='Input data must be a dataframe'
     with pytest.raises(TypeError,match=msg1):
@@ -45,7 +46,7 @@ def test_input():
 
 def test_output():
     '''
-    check if the output is valid
+    check if the output is in the valid range for the performABtest_Bayesian function
     '''
 
     assert AB.performABtest_Bayesian(df) > 0
