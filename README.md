@@ -1,4 +1,5 @@
 # BlackBox_Python
+[![Build Status](https://travis-ci.org/UBC-MDS/BlackBox_Python.svg?branch=master)](https://travis-ci.org/UBC-MDS/BlackBox_Python)
 
 ### Contributors
 
