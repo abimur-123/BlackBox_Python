@@ -1,25 +1,51 @@
-def getConfidenceInterval(df):
+import numpy as np
+import scipy.stats as st
+
+def getConfidenceInterval(x):
     """
     Compute 95% confidence interval (frequentist approach)
 
     Args:
-    dataframe: first column is name(string), second column is score(numeric)
+    x:numpy array, with at least 1 observation and exactly 1 column
 
     Return:
-    dataframe(three columns:name,lower_bound,upper_bound)
+    numeric array with 2 elements
     """
 
-    pass
+    xbar=x.mean()
+    n=x.shape[0]
+    sd=x.std()
+    lower=xbar-1.96*(sd/np.sqrt(n))
+    upper=xbar+1.96*(sd/np.sqrt(n))
+    interval=[lower,upper]
+    return interval
 
-def getCredibleInterval(df):
+
+def getCredibleInterval(x,prior_dis,sample_dis):
     """
     compute 95% credible interval (bayesian approach)
 
     Args:
-    dataframe: first column is name(string), second column is score(numeric)
+    x:numpy array, with at least 1 observation and exactly 1 column
+    prior_dis: list, with exactly two number
+    sample_dis: list, with exactly two number
 
     Return:
-    dataframe(three columns:name,lower_bound,upper_bound)
+    numeric array with 2 elements
     """
 
-    pass
+    prior_mean=prior_dis[0]
+    prior_sd=prior_dis[1]
+    sample_mean=sample_dis[0]
+    sample_sd=sample_dis[1]
+    vector_mean=x.mean()
+    vector_n=x.shape[0]
+    post_mean=post_mean<-(vector_mean*vector_n/sample_sd+prior_mean*1/prior_sd)/(vector_n/sample_sd+1/prior_sd**2)
+    post_sd=1/(vector_n/(sample_sd**2)+1/(prior_sd**2))
+
+    lower=st.norm.ppf(0.025,loc=post_mean,scale=post_sd)
+    upper=st.norm.ppf(0.975,loc=post_mean,scale=post_sd)
+
+    interval=[lower,upper]
+
+    return interval
