@@ -6,10 +6,10 @@ def getConfidenceInterval(x):
     Compute 95% confidence interval (frequentist approach)
 
     Args:
-    x:numpy array, with at least 1 observation and exactly 1 column
+    x :numpy array, with at least 1 observation
 
     Return:
-    numeric array with 2 elements
+    interval: list with 2 elements
     """
 
     xbar=x.mean()
@@ -17,7 +17,7 @@ def getConfidenceInterval(x):
     sd=x.std()
     lower=xbar-1.96*(sd/np.sqrt(n))
     upper=xbar+1.96*(sd/np.sqrt(n))
-    interval=[lower,upper]
+    interval=list[lower,upper]
     return interval
 
 
@@ -26,12 +26,12 @@ def getCredibleInterval(x,prior_dis,sample_dis):
     compute 95% credible interval (bayesian approach)
 
     Args:
-    x:numpy array, with at least 1 observation and exactly 1 column
+    x:numpy array with at least 1 observation
     prior_dis: list, with exactly two number
     sample_dis: list, with exactly two number
 
     Return:
-    numeric array with 2 elements
+    interval: list with 2 elements
     """
 
     prior_mean=prior_dis[0]
@@ -46,6 +46,6 @@ def getCredibleInterval(x,prior_dis,sample_dis):
     lower=st.norm.ppf(0.025,loc=post_mean,scale=post_sd)
     upper=st.norm.ppf(0.975,loc=post_mean,scale=post_sd)
 
-    interval=[lower,upper]
+    interval=list[lower,upper]
 
     return interval
