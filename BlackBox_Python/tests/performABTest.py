@@ -27,22 +27,62 @@ def test_input():
     check if the input is valid for performABtest_Freq function
     Try invalid and NULL input.
     '''
-    msg1='Input data must be a dataframe'
-    with pytest.raises(TypeError,match=msg1):
-        AB.performABtest_Freq([1,2,3])
 
-    msg2='need to pass in a dataframe'
-    with pytest.raises(TypeError,match=msg2):
+    # Capture incorrect input data
+    try:
         AB.performABtest_Freq()
+    except(TypeError):
+        assert True
+    else:
+        assert False
 
-    # #valid dataframe must have at least 1 observations
-    # assert df.shape[0] > 2
+    # Capture incorrect alpha values
+    try:
+        AB.performABtest_Freq(data = data,alpha = 1.5)
+    except(ValueError):
+        assert True
+    else:
+        assert False
 
-    #valid dataframe must include two columns only
-    assert df.shape[1] == 2
 
-    #check if column2 is numeric
-    assert np.array_equal(df.iloc[:,1].unique(),[0,1])
+    try:
+        data = {'name':name,'value':value,'value_copy':value}
+        AB.performABtest_Freq(data = data)
+    except(TypeError):
+        assert True
+    else:
+        assert False
+
+    try:
+        #sample dataframe
+        n = 20
+        p = 0.5
+        x = 2
+        name = np.repeat(('A','B'),n/2)
+        value= np.random.binomial(x, p,size = n)
+        data = {'name':name,'value':value}
+    except(TypeError):
+        assert True
+    else:
+        False
+
+    # Generate output
+    n = 2500
+    p = 0.5
+    x = 1
+    name = np.repeat(('A','B'),n/2)
+    value= np.random.binomial(x, p,size = n)
+    d = {'input':name,'event':value}
+    inp = pd.DataFrame(data=d)
+    op = AB_freq(inp,0.1)
+
+    # Check if p-value is between 0 and 1
+    op_p_val = True if op[1] > 0 and op[1] <= 1 else False
+    
+    #assert length and type of op
+    assert len(op) == 3
+    assert isinstance(data,pd.DataFrame) == True
+    assert op_p_val == True
 
 def test_output():
     '''
