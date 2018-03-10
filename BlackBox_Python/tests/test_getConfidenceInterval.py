@@ -15,13 +15,15 @@ def test_input():
     '''
     check if the input is valid for getConfidenceInterval()
     '''
-    msg1='Input data must be numpy array with one column only'
-    with pytest.raises(TypeError,match=msg1):
-        ci.getConfidenceInterval(np.array([1,2,3],[2,3,4]))
+    with pytest.raises(AttributeError):
+        ci.getConfidenceInterval(np.array([[1,2,3],[2,3,4]]))
 
-    msg2='need to pass in a dataframe'
-    with pytest.raises(TypeError,match=msg2):
+
+    with pytest.raises(TypeError):
         ci.getConfidenceInterval()
+
+    with pytest.raises(AttributeError):
+        ci.getConfidenceInterval(list([1,2,3]))
 
     #valid dataframe must have at least 1 observations
     assert sample.shape[0]>0
@@ -29,7 +31,7 @@ def test_input():
     #valid dataframe must include two columns only
     assert len(sample.shape)==1
 
-    #check if column2 is numeric
+    #check if the vector is numeric
     assert sample.dtype==np.int64 or sample.dtype==np.float64
 
 def test_output():
@@ -46,8 +48,8 @@ def test_output():
     assert ci.getConfidenceInterval(sample)[1]<=sample.max()
 
     #check if the interval is correct
-    expected_lower=1.576331
-    expected_upper=4.923668
+    expected_lower=1.800560
+    expected_upper=4.699439
 
-    assert abs(getCredibleInterval(sample)[0]-expected_lower)<1e-5
-    assert abs(getCredibleInterval(sample)[1]-expected_upper)<1e-5
+    assert abs(ci.getConfidenceInterval(sample)[0]-expected_lower)<1e-5
+    assert abs(ci.getConfidenceInterval(sample)[1]-expected_upper)<1e-5
