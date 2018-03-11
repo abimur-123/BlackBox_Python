@@ -69,6 +69,23 @@ A/B testing is an experiment with 2 versions - A and B. It is a two sample hypot
 ##### Function
 `performABtest_Freq(data,alpha)`
 
+**Example usage**
+
+```
+from BlackBox_Python import ABtests as AB
+import numpy as np
+import pandas as pd
+
+n = 2500
+p = 0.5
+x = 1
+name = np.repeat(('A','B'),n/2)
+value= np.random.binomial(x, p,size = n)
+d = {'input':name,'event':value}
+inp = pd.DataFrame(data=d)
+op = AB.performABtest_Freq(inp,0.1)
+```
+
 ##### Parameters
 - data: input dataframe with 2 columns: name and event. Name consists of the A and B values one is trying to test and event consists of the outcome of the event(0 or 1).
 - alpha: This defines the false positive rate while testing. Default value is **0.05**
