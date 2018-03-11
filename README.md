@@ -20,9 +20,45 @@ This package is aimed at users who are attempting to familiarize themselves with
 
 ## Functions
 
-getCredibleInterval() : Perform Monte-Carlo estimation to obtain credible intervals
+getCredibleInterval(x,prior\_dis,sample\_dis) :   
+**Purpose:** obtain credible intervals using Bayesian approach(we now just accpet normal distribution data, may accept more distribution in future )  
 
-getConfidenceInterval() : Obtain confidence interval for the result
+**Args:**   
+x:numpy array with at least 1 observation  
+prior\_dis: list, with exactly two number  
+sample\_dis: list, with exactly two number
+
+**Returns:**   
+interval: list with 2 elements
+
+**Example**   
+
+```
+import numpy as np
+sample=np.random.normal(loc=3,scale=1,size=5)
+getCredibleInterval(sample,list([2,1]),list([3,1]))
+```
+************
+
+getConfidenceInterval() : Obtain confidence interval for the result  
+
+**Purpose:** Obtain confidence interval for the result(we now just accpet normal distribution data, may accept more distribution in future)
+
+**Args:**   
+x :numpy array, with at least 1 observation
+>>>>>>> upstream/master
+
+
+**Returns:**   
+interval: list with 2 elements
+
+**Example**   
+
+```
+import numpy as np
+sample=np.random.normal(loc=3,scale=1,size=5)
+getConfidenceInterval(sample)
+```
 
 ### AB Testing
 
@@ -39,7 +75,6 @@ A/B testing is an experiment with 2 versions - A and B. It is a two sample hypot
 
 #### Bayesian approach
 This approach is WIP
-
 
 getMAP(): Get Maximum a Priori estimate for the parameters for a given distribution.
 
