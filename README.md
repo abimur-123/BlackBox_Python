@@ -31,11 +31,11 @@ getConfidenceInterval() : Obtain confidence interval for the result
 A/B testing is an experiment with 2 versions - A and B. It is a two sample hypothesis testing which compares the subject's response to 2 versions of an entity(like a website).
 
 ##### Function
-`performABtest(data,alpha)``
+`performABtest_Freq(data,alpha)`
 
 ##### Parameters
 - data: input dataframe with 2 columns: name and event. Name consists of the A and B values one is trying to test and event consists of the outcome of the event(0 or 1).
-- alpha: This defines the false positive rate while testing.
+- alpha: This defines the false positive rate while testing. Default value is **0.05**
 
 #### Bayesian approach
 This approach is WIP
