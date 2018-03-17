@@ -13,8 +13,12 @@ def getConfidenceInterval(x):
     """
     if (len(x.shape)>1):
         raise AttributeError('Input data must be numpy array with one column only')
+
     if(isinstance(x,np.ndarray) == False):
         raise TypeError("Not a numpy array")
+
+    assert x.shape[0]!=0, "Empty Array!"
+
     xbar=x.mean()
     n=x.shape[0]
     sd=x.std()
@@ -40,6 +44,7 @@ def getCredibleInterval(x,prior_dis,sample_dis):
         raise AttributeError('Input data must be numpy array with one column only')
     if(isinstance(x,np.ndarray) == False):
         raise TypeError("Not a numpy array")
+    assert x.shape[0]!=0, "Empty Array!"
 
     prior_mean=prior_dis[0]
     prior_sd=prior_dis[1]
