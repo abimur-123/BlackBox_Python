@@ -68,7 +68,7 @@ def test_input_types():
     try:
         MVM.getMLE("poisson", [1.5, 0.1, 1, 2])
     except TypeError:
-        assert False
+        assert True
     else:
         assert False
 
