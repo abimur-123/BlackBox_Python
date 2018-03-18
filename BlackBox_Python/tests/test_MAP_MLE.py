@@ -80,3 +80,4 @@ def test_output():
     '''
     # likelihood returned is between 0 and 1
     assert MVM.getMLE("poisson",[1,0,1,1,1,3,2]) >= 0
+    assert 0 <= MVM.getMLE("bernoulli", [1, 0, 1, 1, 1, 1, 0]) <= 1
