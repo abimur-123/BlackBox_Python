@@ -46,7 +46,6 @@ getConfidenceInterval() : Obtain confidence interval for the result
 
 **Args:**   
 x :numpy array, with at least 1 observation
->>>>>>> upstream/master
 
 
 **Returns:**   
