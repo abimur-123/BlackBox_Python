@@ -1,37 +1,43 @@
 import pandas as pd
-def getMLE(distribution,column):
+import numpy as np
+import pandas as pd
+from scipy.optimize import minimize
+
+def getMLE(distribution,data):
     """
     compute the log likelihood of data given the distribution
-
     Args:
     distribution: type of distribution of the data. for example (binomial, poisson). Support for 2 as of now.
-    column: the list of numeric data over which we perform the maximum likelihood
-
+    data: the list of numeric data over which we perform the maximum likelihood
     Return:
     the log likelihood of the data
     """
-    if(isinstance(distribution,str) == False):
-        raise TypeError("Not a string value")
+    if not (isinstance(distribution,str)):
+        raise TypeError("Type of distribution must be a string value")
 
-    if(isinstance(column,list) == False):
-        raise TypeError("Not a list")
+    if not isinstance(data, list):
+        raise TypeError("Input data must be a numeric list")
 
-    pass
+    vec_list = np.array(data)
 
-def getMAP(column,prior = None):
-    """
-    calculate the maximum a posteriori (MAP) estimation. MAP estimate is the mode of the posterior distribution.
-    MAP is proportional to likelihood function and prior.
+    if (str.lower(distribution) != "poisson") ^ (str.lower(distribution) == "bernoulli"):
+        raise TypeError("Input values for distribution can only take in values; Bernoulli and Poisson")
 
-    Args:
-    column: the column is a list of numerical binomial data. Support for only binomial currently.
-    We will be using Beta-Binomial Conjugacy as an example for first time learners.
-    prior: prior assumptions of the data
+    if str.lower(distribution) == "bernoulli" and len(vec_list) > 1 and not np.array_equal(np.unique(vec_list), [0, 1]):
+        raise TypeError("Data for bernoulli should only have values of numeric 0 and 1")
 
-    Return:
-    the MAP estimate of the posterior.
-    """
-    if(isinstance(column,list) == False):
-        raise TypeError("Not a list")
+    if (str.lower(distribution) == "bernoulli" or str.lower(distribution) == "poisson") and np.array_equal(len(vec_list),1):
+        raise TypeError("Wrong format for data input; list of length > 1 expected")
 
-    pass
+    if isinstance(distribution,str) and not np.equal(np.mod(vec_list, 1), 0).all():
+        raise TypeError("Wrong format for data input, list must contain must only contain integer values")
+
+    if isinstance(distribution,str) and not (vec_list >= 0).all():
+        raise TypeError("Wrong format for data input, list must contain must only contain non-negative integer values")
+
+    if str.lower(distribution) == "poisson":
+        likelihood_poisson = np.mean(vec_list)
+        return likelihood_poisson
+
+    if str.lower(distribution) == "bernoulli":
+        return np.mean(vec_list)

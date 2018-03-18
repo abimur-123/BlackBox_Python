@@ -31,7 +31,7 @@ sample\_dis: list, with exactly two number
 **Returns:**   
 interval: list with 2 elements
 
-**Example**   
+**Example Usage**   
 
 ```
 import numpy as np
@@ -46,7 +46,6 @@ getConfidenceInterval() : Obtain confidence interval for the result
 
 **Args:**   
 x :numpy array, with at least 1 observation
->>>>>>> upstream/master
 
 
 **Returns:**   
@@ -90,12 +89,36 @@ op = AB.performABtest_Freq(inp,0.1)
 - data: input dataframe with 2 columns: name and event. Name consists of the A and B values one is trying to test and event consists of the outcome of the event(0 or 1).
 - alpha: This defines the false positive rate while testing. Default value is **0.05**
 
+#### Maximum Likelihood Estimate
+
+getMLE(): Get maximum likelihood value of the parameter for a given distribution.
+
+##### Function
+
+`getMLE(distribution,data): Get maximum likelihood value of the parameter for a given distribution.`
+
+#### Parameters
+- distribution: type of distribution of the data: Supporting **bernoulli** and **poisson** as of now
+- data: the column is a list of numeric data over which likelihood is performed
+
+#### Returns
+log likelihood of the data. For example, mean for Poisson, probability for Bernoulli.
+
+**Example usage**   
+
+```
+bernoulli_column = [0,1,1,0,1,0,1,1,1,1,1]
+getMLE("bernoulli",bernoulli_column)
+
+poisson_column = [0,1,2,3,1,2,3,9,6,10,11]
+getMLE("poisson",poisson_column)
+```
+
+
 #### Bayesian approach
 This approach is WIP
 
 getMAP(): Get Maximum a Priori estimate for the parameters for a given distribution.
-
-getMLE(): Get maximum likelihood value of the parameter for a given distribution.
 
 
 ### Similar Packages
