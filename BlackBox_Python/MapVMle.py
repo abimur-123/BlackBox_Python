@@ -39,13 +39,5 @@ def getMLE(distribution,data):
         likelihood_poisson = np.mean(vec_list)
         return likelihood_poisson
 
-
-def loglikelihoodbernoulli(sequence,p):
-    log_likelihood = 0
-    for i in range(0, len(sequence)):
-        if sequence[i] == 1:
-            log_likelihood = log_likelihood + np.log(p)
-        else:
-            log_likelihood = log_likelihood + np.log(1-p)
-
-    return log_likelihood
+    if str.lower(distribution) == "bernoulli":
+        return np.mean(vec_list)
