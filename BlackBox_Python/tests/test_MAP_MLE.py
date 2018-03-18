@@ -15,14 +15,63 @@ from BlackBox_Python import MapVMle as MVM
 
 # test inputs
 def test_input_types():
-  '''
-  Check input types for getMLE function
-  '''
-  with pytest.raises(TypeError):
-    MVM.getMLE(12345,12345)
 
-  with pytest.raises(TypeError):
-    MVM.getMLE("1233","1231")
+    try:
+        MVM.getMLE()
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE(1,[1,0,0,1])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("hello", [1, 0, 0, 1])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("poisson", [1])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("bernoulli", [1])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("bernoulli", [1, 0, 2, 1])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("poisson", [-1, 0, 1, 2])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
+    try:
+        MVM.getMLE("poisson", [1.5, 0.1, 1, 2])
+    except TypeError:
+        assert True
+    else:
+        assert False
+
 
 
 def test_output():
@@ -30,7 +79,4 @@ def test_output():
     check if the output is valid
     '''
     # likelihood returned is between 0 and 1
-    assert MVM.getMLE("binomial",[1,0,1,1,1,3,2]) >= 0 and MVM.getMLE("binomial",[1,0,1,1,1,3,2]) <= 1
-
-    ### count returned is greater than 0
-    assert (MVM.getMAP("poisson","[1,2,3]")) > 0
+    assert MVM.getMLE("poisson",[1,0,1,1,1,3,2]) >= 0
