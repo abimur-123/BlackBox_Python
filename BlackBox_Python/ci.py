@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.stats as st
+import scipy.stats as stats
 
 def getConfidenceInterval(x):
     """
@@ -13,8 +13,12 @@ def getConfidenceInterval(x):
     """
     if (len(x.shape)>1):
         raise AttributeError('Input data must be numpy array with one column only')
+
     if(isinstance(x,np.ndarray) == False):
         raise TypeError("Not a numpy array")
+
+    assert x.shape[0]!=0, "Empty Array!"
+
     xbar=x.mean()
     n=x.shape[0]
     sd=x.std()
@@ -40,6 +44,7 @@ def getCredibleInterval(x,prior_dis,sample_dis):
         raise AttributeError('Input data must be numpy array with one column only')
     if(isinstance(x,np.ndarray) == False):
         raise TypeError("Not a numpy array")
+    assert x.shape[0]!=0, "Empty Array!"
 
     prior_mean=prior_dis[0]
     prior_sd=prior_dis[1]
@@ -50,8 +55,8 @@ def getCredibleInterval(x,prior_dis,sample_dis):
     post_mean=(vector_mean*vector_n/sample_sd+prior_mean*1/prior_sd)/(vector_n/sample_sd+1/prior_sd**2)
     post_sd=1/(vector_n/(sample_sd**2)+1/(prior_sd**2))
 
-    lower=st.norm.ppf(0.025,loc=post_mean,scale=post_sd)
-    upper=st.norm.ppf(0.975,loc=post_mean,scale=post_sd)
+    lower=stats.norm.ppf(0.025,loc=post_mean,scale=post_sd)
+    upper=stats.norm.ppf(0.975,loc=post_mean,scale=post_sd)
 
     interval=[lower,upper]
 
