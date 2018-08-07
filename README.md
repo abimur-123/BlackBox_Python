@@ -1,4 +1,4 @@
-# Bayesian and Frequentist approach using BlackBox_Python
+# Bayesian and Frequentist approach using Python
 [![Build Status](https://travis-ci.org/UBC-MDS/BlackBox_Python.svg?branch=master)](https://travis-ci.org/UBC-MDS/BlackBox_Python)
 
 ## Installation
@@ -132,5 +132,7 @@ getMLE("poisson",poisson_column)
 This approach is WIP
 
 ### Similar Packages
+
+The R Package we built for this application can be found [here](https://github.com/abimur-123/BlackBoxR)
 
 We are still on the hunt for similar packages.
